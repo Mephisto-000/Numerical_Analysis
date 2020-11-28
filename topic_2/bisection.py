@@ -1,14 +1,15 @@
 
 
 
-def b_method(f, a, b, tor, N):
+def b_method(f, a, b, tor, N, fl):
     """
     The Bisection Method
-    :param f: Given function
+    :param f: given function
     :param a: left endpoint
     :param b: right endpoint
     :param tor: tolerance
     :param N: maximum number of iterations
+    :param fl: given significant digits
     :return: approximate solution p
     """
     err = 1
@@ -27,7 +28,7 @@ def b_method(f, a, b, tor, N):
             if (b - a)/2 < tor:
                 break
             itr0 = itr0 + 1
-        return p
+        return format(p, f".{fl}g")
 
 
 def b_method_table(f, a, b, tor, N, fl):
@@ -68,8 +69,9 @@ def b_method_table(f, a, b, tor, N, fl):
 if __name__ == "__main__" :
 
     f = lambda x : x**3 + 4 * x**2 - 10
-    p_v = b_method(f, 1, 2, 10e-5, 13)
-    print(format(p_v, ".10g"))
+
+    p_v = b_method(f, 1, 2, 10e-5, 13, 10)
+    print(p_v)
 
     p_v_t = b_method_table(f, 1, 2, 10e-5, 13, 10)
     print("\n", p_v_t)
