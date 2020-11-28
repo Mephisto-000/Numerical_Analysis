@@ -40,7 +40,7 @@ def b_method_table(f, a, b, tor, N, fl):
     :param tor: tolerance
     :param N: maximum number of iterations
     :param fl: given significant digits
-    :return: table of approximate solution p_k
+    :return: list of approximate solution p_k
     """
     err = 1
     itr0 = 0
