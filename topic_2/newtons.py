@@ -1,10 +1,11 @@
 
 
 
-def fix_p(f, x0, tor, N, fl):
+def newtons_method(f, df, x0, tor, N, fl):
     """
-    Fixed-Point Iteration
+    Newton's Method
     :param f: given function
+    :param df: derivative of f
     :param x0: initial approximation value
     :param tor: tolerance
     :param N: maximum number of iterations
@@ -14,28 +15,29 @@ def fix_p(f, x0, tor, N, fl):
     err = 1
     itr0 = 0
     while(err > tor and itr0 < N):
-        x = f(x0)
+        x = x0 - f(x0)/df(x0)
         err = abs(x0 - x)
         x0 = x
         itr0 = itr0 + 1
     return format(x, f".{fl}g")
 
 
-def fix_p_table(f, x0, tor, N, fl):
+def newtons_method_table(f, df, x0, tor, N, fl):
     """
-    Fixed-Point Iteration
+    Newton's Method
     :param f: given function
+    :param df: derivative of f
     :param x0: initial approximation value
     :param tor: tolerance
     :param N: maximum number of iterations
     :param fl: given significant digits
-    :return: list of approximate solution p_k
+    :return: list of approximate solution x
     """
     err = 1
     itr0 = 0
     p_k = []
     while(err > tor and itr0 < N):
-        x = f(x0)
+        x = x0 - f(x0)/df(x0)
         err = abs(x0 - x)
         x0 = x
         p_k.append(format(x0, f".{fl}g"))
@@ -45,12 +47,15 @@ def fix_p_table(f, x0, tor, N, fl):
 
 
 
+
+
 if __name__ == "__main__" :
 
-    f = lambda x : x**(1/2)
+    f = lambda x: x**3 - x**2 - 1
+    df = lambda x: 3 * x**2 - 2 * x
 
-    x_f = fix_p(f, 0.5, 10e-5, 100, 10)
-    print(x_f)
+    newt_f = newtons_method(f, df, 1, 10e-5, 100, 10)
+    print(newt_f)
 
-    x_f_t = fix_p_table(f, 0.5, 10e-5, 100, 10)
-    print(x_f_t)
+    newt_f_t = newtons_method_table(f, df, 1, 10e-5, 100, 10)
+    print(newt_f_t)
